@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    <!-- ##### Contact Form Area Start ##### -->
+    <div class="contact-area section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-title">
+                        <h2>Contact us</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form-area">
+                        <form action="/contactus/" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="E-mail">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn newspaper-btn mt-30 w-100" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    {% for message in messages%}
+                    <script>
+                        alert('{{message}}');
+                    </script>
+                    {% endfor %}
+                </div>
+                <div class="col-12 col-lg-4">
+                    <!-- Single Contact Information -->
+                    <div class="single-contact-information mb-30">
+                        <h6>Address:</h6>
+                        <p>At-Fulvadi, Dist-Surat, Ta-Mahuva <br>Gujarat,Pincode 394250</p>
+                    </div>
+                    <!-- Single Contact Information -->
+                    <div class="single-contact-information mb-30">
+                        <h6>Phone:</h6>
+                        <p>+7567677094 <br>+9824258363</p>
+                    </div>
+                    <!-- Single Contact Information -->
+                    <div class="single-contact-information mb-30">
+                        <h6>Email:</h6>
+                        <p>pminesh470@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ##### Contact Form Area End ##### -->
+
+     {% endblock %}
+</body>
+
+</html>

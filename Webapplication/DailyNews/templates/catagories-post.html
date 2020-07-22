@@ -1,0 +1,68 @@
+{% extends 'base2.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+
+    <!-- ##### Blog Area Start ##### -->
+    <div class="blog-area section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="blog-posts-area">
+                        <center><h1 style="color: red;"><u>ALL</u> <u>NEWS</u></h1></center> 
+                        <!-- Single Featured Post -->
+                        <div class="single-blog-post featured-post mb-30">
+                            {% for i in allnews reversed %}
+                            <div class="post-thumb">
+                                <center><a href="/view_more/{{i.id}}"><img src="{{i.image.url}}" alt="" height="500px" width="600px"></a></center>
+                            </div>
+                            <div class="post-data">
+                                <a href="/view_more/{{i.id}}" class="post-catagory">{{i.subcat}}</a>
+                                <a href="/view_more/{{i.id}}" class="post-title">
+                                    <h6>{{i.title}}</h6>
+                                </a>
+                                <div class="post-meta">
+                                    <p class="post-excerp">{{i.details}}</p>
+                                    <p class="post-excerp"><b>Publish Date :</b> {{i.date }}</p>
+                                    <!-- Post Like & Post Comment -->
+                                    <div class="d-flex align-items-center">
+                                        <a href="/view_more/{{i.id}}" class="post-like"><img src="{% static 'img/core-img/like.png' %}"
+                                                alt=""> <span></span></a>
+                                        <a href="/view_more/{{i.id}}" class="post-comment"><img src="{% static 'img/core-img/chat.png' %}"
+                                                alt=""> <span></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- <nav aria-label="Page navigation example">
+                        <ul class="pagination mt-50">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                        </ul>
+                    </nav> -->
+                </div>
+            </div>
+        </div>
+        <!-- ##### Blog Area End ##### -->
+
+        {% endblock %}
+</body>
+
+</html>

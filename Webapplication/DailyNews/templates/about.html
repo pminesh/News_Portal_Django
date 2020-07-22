@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    <!-- ##### About Area Start ##### -->
+    <section class="about-area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+                    <h2>A young and professional team</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <p>We are always told that being a good team player is important. Previously we have looked at the
+                        roles people play in teams, now we are going to look at how you can lead a team.</p>
+                    <p>A successful team is one where everyone’s unique skills and strengths help the team achieve a
+                        shared goal in the most effective way.</p>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <p>There are different management styles, bosses who shout a lot and stay really strict and those
+                        that take a more relaxed approach. Styles of leadership can change, especially in different
+                        situations or as the team faces new challenges. You might find that as a leader you become
+                        stricter as the project comes to an end, you might start out with a softer style of management
+                        to encourage ideas and ways of working in the beginning. The more you practise the easier it is
+                        to find what leadership style works for you.</p>
+                    <p></p>
+                </div>
+            </div>
+
+            {% for about in about %}
+            <div class="row align-items-center mt-80">
+                <!-- Single Cool Fact -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact d-flex align-items-center">
+                        <h3><span class="counter">{{about.newsarticle}}</span>K</h3>
+                        <div class="cf-text">
+                            <h6>News Article</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Fact -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact d-flex align-items-center">
+                        <h3><span class="counter">{{about.reporters}}</span></h3>
+                        <div class="cf-text">
+                            <h6>Reporters</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Fact -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact d-flex align-items-center">
+                        <h3><span class="counter">{{about.awardswon}}</span></h3>
+                        <div class="cf-text">
+                            <h6>Awards Won</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Fact -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact d-flex align-items-center">
+                        <h3><span class="counter">{{about.yearold}}</span></h3>
+                        <div class="cf-text">
+                            <h6>Years Old</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    <!-- ##### About Area End ##### -->
+
+    <!-- ##### Team Area Start ##### -->
+    <section class="newspaper-team mb-30">
+        <div class="container">
+            <div class="row">
+                {% for employee in emp %}
+                <!-- Single Team Member -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-team-member">
+                        <img src="{{employee.image.url}}" alt="image-{{employee.image}}">
+                        <div class="team-info">
+                            <h5>{{employee.name}}</h5>
+                            <h6>{{employee.positions}}</h6>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Single Team Member -->
+            </div>
+        </div>
+    </section>
+    <!-- ##### Team Area End ##### -->
+
+    {% endblock %}
+</body>
+
+</html>

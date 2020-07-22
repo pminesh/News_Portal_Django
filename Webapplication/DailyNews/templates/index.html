@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+
+
+    {% block body %}
+
+    <div>
+        {% for message in messages%}
+        <script>
+            alert('{{message}}');
+        </script>
+        {% endfor %}
+    </div>
+
+    <!-- ##### Featured Post Area Start ##### -->
+    <div class="featured-post-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-8">
+                    <div class="row">
+
+                        <!-- Single Featured Post -->
+                        <div class="col-12 col-lg-7">
+                            <div class="single-blog-post featured-post">
+                                <div class="post-thumb">
+                                    <a href="/view_more/{{latest_news.id}}/"><img src="{{latest_news.image.url}}"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="/view_more/{{latest_news.id}}/"
+                                        class="post-catagory">{{latest_news.subcat}}</a>
+                                    <a href="/view_more/{{latest_news.id}}/" class="post-title">
+                                        <h6>{{latest_news.title}}</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-excerp">{{latest_news.details}} </p>
+                                        <!-- Post Like & Post Comment -->
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="post-like"><img
+                                                    src="{% static 'img/core-img/like.png' %}" alt="">
+                                                <span></span></a>
+                                            <a href="/view_more/{{latest_news.id}}/" class="post-comment"><img
+                                                    src="{% static 'img/core-img/chat.png' %}" alt="">
+                                                <span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            <!-- Single Featured Post -->
+                            <div class="single-blog-post featured-post-2">
+                                <center>
+                                    <h6>LATEST SPORT NEWS</h6>
+                                </center>
+                                <div class="post-thumb">
+                                    <a href="/view_more/{{lastsport.id}}/"><img src="{{lastsport.image.url}}"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="/view_more/{{lastsport.id}}/"
+                                        class="post-catagory">{{lastsport.subcat}}</a>
+                                    <div class="post-meta">
+                                        <a href="/view_more/{{lastsport.id}}/" class="post-title">
+                                            <h6>{{lastsport.title}}</h6>
+                                        </a>
+                                        <!-- Post Like & Post Comment -->
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="post-like"><img
+                                                    src="{% static 'img/core-img/like.png' %}" alt="">
+                                                <span></span></a>
+                                            <a href="/view_more/{{lastsport.id}}/" class="post-comment"><img
+                                                    src="{% static 'img/core-img/chat.png' %}" alt="">
+                                                <span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Featured Post -->
+                            <div class="single-blog-post featured-post-2">
+                                <center>
+                                    <h6>LATEST BUSINESS NEWS</h6>
+                                </center>
+                                <div class="post-thumb">
+                                    <a href="/view_more/{{lastbusiness.id}}/"><img src="{{lastbusiness.image.url}}"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="/view_more/{{lastbusiness.id}}/"
+                                        class="post-catagory">{{lastbusiness.subcat}}</a>
+                                    <div class="post-meta">
+                                        <a href="/view_more/{{lastbusiness.id}}/" class="post-title">
+                                            <h6>{{lastbusiness.title}}</h6>
+                                        </a>
+                                        <!-- Post Like & Post Comment -->
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="post-like"><img
+                                                    src="{% static 'img/core-img/like.png' %}" alt="">
+                                                <span></span></a>
+                                            <a href="/view_more/{{lastbusiness.id}}/" class="post-comment"><img
+                                                    src="{% static 'img/core-img/chat.png' %}" alt="">
+                                                <span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Featured Post -->
+                            <div class="single-blog-post featured-post-2">
+                                <center>
+                                    <h6>LATEST ENTERTAINMENT NEWS</h6>
+                                </center>
+                                <div class="post-thumb">
+                                    <a href="/view_more/{{lastentertainment.id}}/"><img
+                                            src="{{lastentertainment.image.url}}" alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="/view_more/{{lastentertainment.id}}/"
+                                        class="post-catagory">{{lastentertainment.subcat}}</a>
+                                    <div class="post-meta">
+                                        <a href="/view_more/{{lastentertainment.id}}/"
+                                            class="post-title">{{lastentertainment.title}}</h6>
+                                        </a><br>
+                                        <!-- Post Like & Post Comment -->
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="post-like"><img
+                                                    src="{% static 'img/core-img/like.png' %}" alt="">
+                                                <span></span></a>
+                                            <a href="/view_more/{{lastentertainment.id}}" class="post-comment"><img
+                                                    src="{% static 'img/core-img/chat.png' %}" alt="">
+                                                <span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Featured Post -->
+                    {% for new in news|slice:":6" reversed %}
+                    <div class="single-blog-post small-featured-post d-flex">
+                        <div class="post-thumb">
+                            <a href="/view_more/{{new.id}}/"><img src="{{new.image.url}}" alt=""></a>
+                        </div>
+                        <div class="post-data">
+
+                            <a href="/view_more/{{new.id}}/" class="post-catagory">{{new.subcat}}</a>
+                            <div class="post-meta">
+                                <a href="/view_more/{{new.id}}/" class="post-title">
+                                    <h6>{{new.title}}</h6>
+                                </a>
+                                <p class="post-date"><span>{{new.date}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Featured Post Area End ##### -->
+
+    <!-- ##### Popular News Area Start ##### -->
+    
+    <!-- ##### Video Post Area Start ##### -->
+    <div class="video-post-area bg-img bg-overlay" style="background-image: url(img/bg-img/bg1.jpg);">
+        <center>
+            <h1 style="color: aliceblue;">LIVE TV NEWS
+                <hr style="border: 1px solid white;" width="400px">
+            </h1>
+        </center><br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Single Video Post -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single-video-post">
+                        <img src="{% static 'img/bg-img/video1.png' %}" alt="">
+                        <!-- Video Button -->
+                        <div class="videobtn">
+                            <a href="https://www.youtube.com/watch?v=1YF3ahFIMW0" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
+                        </div><br>
+                        <h1 style="color: aliceblue;">NDTV 24x7 LIVE</h1>
+                    </div>
+                </div>
+
+                <!-- Single Video Post -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single-video-post">
+                        <img src="{% static 'img/bg-img/video2.png' %}" alt="">
+                        <!-- Video Button -->
+                        <div class="videobtn">
+                            <a href="https://www.youtube.com/watch?v=LH7To1agpQg" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
+                        </div><br>
+                        <h1 style="color: aliceblue;">DD NEWS LIVE</h1>
+                    </div>
+                </div>
+
+                <!-- Single Video Post -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single-video-post">
+                        <img src="{% static 'img/bg-img/video3.png' %}" alt="">
+                        <!-- Video Button -->
+                        <div class="videobtn">
+                            <a href="https://www.youtube.com/watch?v=NT5dp_hU_SI" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
+                        </div><br>
+                        <h1 style="color: aliceblue;">CNN News18 LIVE</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Video Post Area End ##### -->
+
+    <!-- ##### Editorial Post Area Start ##### -->
+    <div class="editors-pick-post-area section-padding-80-50">
+        <div class="container">
+            <div class="row">
+                <!-- Editors Pick -->
+                <div class="col-12 col-md-7 col-lg-9">
+                    <div class="section-heading">
+                        <h6>Breaking News</h6>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Single Post -->
+                        <div class="col-12 col-lg-4">
+                            {% for i in Breakingnews reversed %}
+                            <div class="single-blog-post">
+                                <div class="post-thumb">
+                                    <a href="/view_more/{{i.id}}/"><img src="{{i.image.url}}" alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="/view_more/{{i.id}}/" class="post-title">
+                                        <h6>{{i.title}}</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <div class="post-date"><a href="#">{{i.date}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- World News -->
+                <div class="col-12 col-md-5 col-lg-3">
+                    <div class="section-heading">
+                        <h6>World News</h6>
+                    </div>
+
+                    <!-- Single Post -->
+                    <div class="single-blog-post style-2">
+                        {% for i in Internationalnews reversed %}
+                        <div class="post-thumb">
+                            <a href="/view_more/{{i.id}}/"><img src="{{i.image.url}}" alt=""></a>
+                        </div>
+                        <div class="post-data">
+                            <a href="/view_more/{{i.id}}/" class="post-title">
+                                <h6>{{i.title}}</h6>
+                            </a>
+                            <div class="post-meta">
+                                <div class="post-date"><a href="#">{{i.date}}</a></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Editorial Post Area End ##### -->
+    {% endblock %}
+</body>
+
+</html>

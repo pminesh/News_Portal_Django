@@ -1,0 +1,77 @@
+{% extends 'base2.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+
+    <!-- ##### Start Registration Area ##### -->
+
+    <div class="signup-form">
+        <form action="/user_register/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>User Register</h2>
+            <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6"><input type="text" class="form-control" name="first_name"
+                            placeholder="First Name" required="required"></div>
+                    <div class="col-sm-6"><input type="text" class="form-control" name="last_name"
+                            placeholder="Last Name" required="required"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="User Name" required="required">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+                    required="required">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="age" placeholder="Age" required="required">
+            </div>
+            <div class="form-group">
+                <b>Gender</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender"
+                    value="Male">&nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender"
+                    value="Female">&nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender"
+                    value="Other">&nbsp;Other
+            </div>
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload a Profile Photo</button><br><br>
+                <input type="file" name="myfile" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Register Now</button>
+            </div>
+        </form>
+        <div class="text-center">Already have an account? <a href="/user_login/">Sign in</a></div>
+    </div>
+
+    <!-- ##### End Registration Area ##### -->
+
+    <div>
+        {% for message in messages%}
+        <script>
+            alert('{{message}}');
+        </script>
+        {% endfor %}
+    </div>
+
+    
+    {% endblock %}
+</body>
+
+</html>

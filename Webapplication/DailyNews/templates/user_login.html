@@ -1,0 +1,69 @@
+{% extends 'base2.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+
+    <!-- ##### Start Login Area ##### -->
+    {% if user.is_authenticated %}
+    <center>
+        <h1>User is already logged in</h1>
+    </center>
+    {% else %}
+    <div class="signup-form">
+        <form action="/user_login/" method="POST">
+            <h2>User Login</h2>
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="User Name" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+            </div>
+            <div class="text-center">
+                <a href="/password_reset/"> <b>Forgot your password?</b></a>
+            </div>
+        </form>
+        <!-- <div class="text-center">
+            User Login Using Google Account 
+            Login With <button type="button" class="btn btn-danger"><i class="fab fa-google-plus-g pr-1"></i><a
+                    href="{% provider_login_url "google" %}" style="text-decoration: none; color: wheat;"> <b>Google
+                        +</b></a></button>
+        </div><br> -->
+        <div class="text-center">
+            Not a member yet? <a href="/user_register/">Create your account</a>
+        </div>
+    </div>
+
+    <!-- ##### End Login Area ##### -->
+
+
+    <div>
+        {% for message in messages%}
+        <script>
+            alert('{{message}}');
+        </script>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    {% endblock %}
+
+</body>
+
+</html>

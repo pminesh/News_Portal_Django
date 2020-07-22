@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    {% block head %}
+    <title>Base</title>
+    {% endblock %}
+</head>
+
+<body>
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="/"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                            </div>
+
+                            <!-- Login Search Area -->
+                            <div class="login-search-area d-flex align-items-center">
+                                <!-- Login -->
+                                <div class="login d-flex">
+                                    {% if user.is_authenticated %}
+                                    {% else %}
+                                    <a href="/user_login/">Login</a>
+                                    <a href="/user_register/">Register</a>
+                                    {% endif %}
+                                </div>
+                                <!-- Search Form -->
+                                <div class="search-form">
+                                    <form action="/search/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="search" name="search" class="form-control" placeholder="Catagories wise Search">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {% if user.is_authenticated %}
+                                <b style="color: aliceblue;">Hello,
+                                    {{user.first_name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                {% if user.is_authenticated %}
+                                <a href="/logoutform/" style="color: aliceblue;">Logout</a>
+                                {% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% if user.is_authenticated %}
+                                <img src="{{ user.userprofile.image.url }}" width="75" height="75"
+                                    style="border-radius: 50% 50% 50% 50%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="newspaper-main-menu" id="stickyMenu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="newspaperNav">
+
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="/"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                        </div>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li class="active"><a href="/">Home</a></li>
+                                    <li><a href="#">Catagories</a>
+                                        <div class="megamenu">
+                                            <ul class="single-mega cn-col-4">
+                                                <li class="title">NEWS</li>
+                                                {% for new in cat %}
+                                                {% ifequal new.category.category "NEWS"%}
+                                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                                {% endifequal %}
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li class="title">BUSINESS</li>
+                                                {% for new in cat %}
+                                                {% ifequal new.category.category "BUSINESS"%}
+                                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                                {% endifequal %}
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li class="title">SPORT</li>
+                                                {% for new in cat %}
+                                                {% ifequal new.category.category "SPORT"%}
+                                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                                {% endifequal %}
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="single-mega cn-col-4">
+                                                <!-- Single Featured Post -->
+                                                <div class="single-blog-post small-featured-post d-flex">
+                                                    <div class="post-thumb">
+                                                        <a href="/view_more/{{latest_news.id}}/"><img
+                                                                src="{{ latest_news.image.url }}" alt=""></a>
+                                                    </div>
+                                                    <div class="post-data">
+                                                        <a href="/view_more/{{latest_news.id}}/"
+                                                            class="post-catagory">{{latest_news.subcat}}</a>
+                                                        <div class="post-meta">
+                                                            <a href="/view_more/{{latest_news.id}}/" class="post-title">
+                                                                <h6>{{latest_news.title}}</h6>
+                                                            </a>
+                                                            <p class="post-date"><span>{{latest_news.date}}</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Single Featured Post -->
+                                                <div class="single-blog-post small-featured-post d-flex">
+                                                    {% for new in news|slice:"1:2" reversed %}
+                                                    <div class="post-thumb">
+                                                        <a href="/view_more/{{new.id}}/"><img src="{{ new.image.url }}"
+                                                                alt=""></a>
+                                                    </div>
+                                                    <div class="post-data">
+                                                        <a href="/view_more/{{new.id}}/"
+                                                            class="post-catagory">{{new.subcat}}</a>
+                                                        <div class="post-meta">
+                                                            <a href="/view_more/{{new.id}}/" class="post-title">
+                                                                <h6>{{new.title}}</h6>
+                                                            </a>
+                                                            <p class="post-date"><span>{{new.date}}</span></p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><a href="/allnews/">All News</a></li>
+                                    <li><a href="/about/">About Us</a></li>
+                                    <li><a href="/contact/">Contact</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="#">My Profile</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/password_change/">Change Password</a></li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    <!-- ##### Hero Area Start ##### -->
+    <div class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-area d-flex align-items-center">
+                        <div class="news-title">
+                            <p>Breaking News</p>
+                        </div>
+                        <div id="breakingNewsTicker" class="ticker">
+                            <ul>
+                                {% for new in allnews %}
+                                {% ifequal new.subcat.subcat "Breaking-News"%}
+                                <li><a href="/view_more/{{new.id}}/">{{new.title}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-area d-flex align-items-center mt-15">
+                        <div class="news-title title2">
+                            <p>International</p>
+                        </div>
+                        <div id="internationalTicker" class="ticker">
+                            <ul>
+                                {% for new in allnews %}
+                                {% ifequal new.subcat.subcat "International-News"%}
+                                <li><a href="/view_more/{{new.id}}/">{{new.title}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clock -->
+                <div class="col-12 col-lg-4">
+                    <div class="hero-add">
+                        <canvas id="canvas" width="200" height="150" style="background-color:white">
+                        </canvas>
+
+                        <script>
+                            var canvas = document.getElementById("canvas");
+                            var ctx = canvas.getContext("2d");
+                            var radius = canvas.height / 2;
+                            ctx.translate(radius, radius);
+                            radius = radius * 0.90
+                            setInterval(drawClock, 1000);
+
+                            function drawClock() {
+                                drawFace(ctx, radius);
+                                drawNumbers(ctx, radius);
+                                drawTime(ctx, radius);
+                            }
+
+                            function drawFace(ctx, radius) {
+                                var grad;
+                                ctx.beginPath();
+                                ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+                                ctx.fillStyle = 'white';
+                                ctx.fill();
+                                grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+                                grad.addColorStop(0, '#333');
+                                grad.addColorStop(0.5, 'white');
+                                grad.addColorStop(1, '#333');
+                                ctx.strokeStyle = grad;
+                                ctx.lineWidth = radius * 0.1;
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+                                ctx.fillStyle = '#333';
+                                ctx.fill();
+                            }
+
+                            function drawNumbers(ctx, radius) {
+                                var ang;
+                                var num;
+                                ctx.font = radius * 0.15 + "px arial";
+                                ctx.textBaseline = "middle";
+                                ctx.textAlign = "center";
+                                for (num = 1; num < 13; num++) {
+                                    ang = num * Math.PI / 6;
+                                    ctx.rotate(ang);
+                                    ctx.translate(0, -radius * 0.85);
+                                    ctx.rotate(-ang);
+                                    ctx.fillText(num.toString(), 0, 0);
+                                    ctx.rotate(ang);
+                                    ctx.translate(0, radius * 0.85);
+                                    ctx.rotate(-ang);
+                                }
+                            }
+
+                            function drawTime(ctx, radius) {
+                                var now = new Date();
+                                var hour = now.getHours();
+                                var minute = now.getMinutes();
+                                var second = now.getSeconds();
+                                //hour
+                                hour = hour % 12;
+                                hour = (hour * Math.PI / 6) +
+                                    (minute * Math.PI / (6 * 60)) +
+                                    (second * Math.PI / (360 * 60));
+                                drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+                                //minute
+                                minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+                                drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+                                // second
+                                second = (second * Math.PI / 30);
+                                drawHand(ctx, second, radius * 0.9, radius * 0.02);
+                            }
+
+                            function drawHand(ctx, pos, length, width) {
+                                ctx.beginPath();
+                                ctx.lineWidth = width;
+                                ctx.lineCap = "round";
+                                ctx.moveTo(0, 0);
+                                ctx.rotate(pos);
+                                ctx.lineTo(0, -length);
+                                ctx.stroke();
+                                ctx.rotate(-pos);
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### clock End ##### -->
+
+    {% block body %}
+    {% endblock %}
+    <!-- ##### Footer Add Area Start ##### -->
+    <!--<div class="footer-add-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-add">
+                        <a href="#"><img src="{% static 'img/bg-img/footer-add.gif' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- ##### Footer Add Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="footer-widget-area mt-80">
+                            <!-- Footer Logo -->
+                            <div class="footer-logo">
+                                <a href="/"><img src="{% static 'img/core-img/logo2.jpg' %}" alt=""></a>
+                            </div>
+                            <!-- List -->
+                            <ul class="list">
+                                <li><a href="mailto:pminesh470@gmail.com">pminesh470@gmail.com</a></li>
+                                <b>Mobile No1:</b>
+                                <li><a href="tel:+7567677094">+7567677094</a></li>
+                                <b>Mobile No2:</b>
+                                <li><a href="tel:+9824258363">+9824258363</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="footer-widget-area mt-80">
+                            <!-- Title -->
+                            <h4 class="widget-title">BUSINESS</h4>
+                            <!-- List -->
+                            <ul class="list">
+                                {% for new in cat %}
+                                {% ifequal new.category.category "NEWS"%}
+                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-4 col-lg-2">
+                        <div class="footer-widget-area mt-80">
+                            <!-- Title -->
+                            <h4 class="widget-title">SPORT</h4>
+                            <!-- List -->
+                            <ul class="list">
+                                {% for new in cat %}
+                                {% ifequal new.category.category "SPORT"%}
+                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-4 col-lg-2">
+                        <div class="footer-widget-area mt-80">
+                            <!-- Title -->
+                            <h4 class="widget-title">NEWS</h4>
+                            <!-- List -->
+                            <ul class="list">
+                                {% for new in cat %}
+                                {% ifequal new.category.category "NEWS"%}
+                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-4 col-lg-2">
+                        <div class="footer-widget-area mt-80">
+                            <!-- Title -->
+                            <h4 class="widget-title">ENTERTAINMENT</h4>
+                            <!-- List -->
+                            <ul class="list">
+                                {% for new in cat %}
+                                {% ifequal new.category.category "ENTERTAINMENT"%}
+                                <li><a href="/category_news/{{new.id}}/">{{new.subcat}}</a></li>
+                                {% endifequal %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <!-- Copywrite -->
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>

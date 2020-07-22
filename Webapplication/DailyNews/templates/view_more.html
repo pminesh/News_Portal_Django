@@ -1,0 +1,112 @@
+{% extends 'base2.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% block head %}
+    <title>DailyNews</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+
+    <!-- ##### Blog Area Start ##### -->
+    <div class="blog-area section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="blog-posts-area">
+                        <center>
+                            <h1 style="color: red;"><u>{{mynews.subcat.subcat}}</u></h1>
+                        </center>
+                        <!-- Single Featured Post -->
+                        <div class="single-blog-post featured-post mb-30">
+                            <div class="post-thumb">
+                                <center><a href="#"><img src="{{mynews.image.url}}" alt="" height="500px"
+                                            width="600px"></a></center>
+                            </div>
+                            <div class="post-data">
+                                <a href="#" class="post-catagory"></a>
+                                <a href="#" class="post-title">
+                                    <h6>{{mynews.title}}</h6>
+                                </a>
+                                <div class="post-meta">
+                                    <p class="post-excerp">{{mynews.details}}</p>
+                                    <p class="post-excerp"><b>Publish Date :</b>{{mynews.date}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-a-comment-area section-padding-80-0">
+                        <h4>Write a comment</h4>
+                        <!-- Reply Form -->
+                        <div class="contact-form-area">
+                            <form action="/comment/{{mynews.id}}/" method="post">
+                                {% csrf_token %}
+                                <div class="col-12">
+                                    <textarea name="comment" class="form-control" id="message" cols="30" rows="10"
+                                        placeholder="Write a comment"></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn newspaper-btn mt-30 w-100" type="submit">Submit
+                                        Comment</button><br><br>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix">
+                        <h5 class="title">{{counter}} Commnets</h5>
+
+                        {% for i in comment %}
+                        {% ifequal i.newsid mynews.id%}
+                        <ol>
+                            <!-- Single Comment Area -->
+
+                            <li class="single_comment_area">
+                                <!-- Comment Content -->
+                                <div class="comment-content d-flex">
+                                    <!-- Comment Author -->
+                                    <div class="comment-author">
+                                        <img src="{{i.userimage.url}}" alt="author">
+                                    </div>
+                                    <!-- Comment Meta -->
+                                    <div class="comment-meta">
+                                        <a href="#" class="post-author">{{i.username}}</a>
+                                        <a href="#" class="post-date">{{i.date}}</a>
+                                        <p>{{i.comments}}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- <ol class="children">
+                                    <li class="single_comment_area">
+                                        <div class="comment-content d-flex">
+                                            <div class="comment-author">
+                                                <img src="img/bg-img/31.jpg" alt="author">
+                                            <div class="comment-meta">
+                                                <a href="#" class="post-author">Sandy Doe</a>
+                                                <a href="#" class="post-date">April 15, 2018</a>
+                                                <p>Donec turpis erat, scelerisque id euismod sit amet, fermentum vel
+                                                    dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan
+                                                    aliquam. Fusce lobortis cursus quam, id mattis sapien.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol> -->
+                            </li>
+                        </ol>
+                        {% endifequal %}
+                        {% endfor %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ##### Blog Area End ##### -->
+
+        {% endblock %}
+</body>
+
+</html>
